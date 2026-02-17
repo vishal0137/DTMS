@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+backend/.env
+frontend/.env
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Mobile (Expo)
+mobile/.expo/
+mobile/.expo-shared/
+mobile/dist/
+mobile/web-build/
+
+# Build
+frontend/dist/
+frontend/build/
+
+# Database
+*.db
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+**/test-*.html
+**/*test*.html
+
+# Data files
+*.zip
+temp_gtfs/
+kaggle_data_path.txt
+
+# Alembic
+backend/alembic/versions/*.py
+!backend/alembic/versions/__init__.py
