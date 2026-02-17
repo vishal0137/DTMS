@@ -1,4 +1,4 @@
-import { Home, Bus, Route, Users, CreditCard, MapPin, BarChart3 } from 'lucide-react'
+import { Home, Bus, Route, Users, CreditCard, MapPin, BarChart3, Navigation } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 
 function Sidebar({ isOpen }) {
@@ -6,6 +6,7 @@ function Sidebar({ isOpen }) {
   
   const menuItems = [
     { icon: Home, label: 'Dashboard', path: '/dashboard' },
+    { icon: Navigation, label: 'Live Tracking', path: '/live-tracking' },
     { icon: Bus, label: 'Bus Routes', path: '/bus-routes' },
     { icon: Route, label: 'Routes', path: '/routes' },
     { icon: MapPin, label: 'Stops', path: '/stops' },

@@ -8,6 +8,7 @@ import StopsPage from './pages/Stops'
 import Bookings from './pages/Bookings'
 import Analytics from './pages/Analytics'
 import Users from './pages/Users'
+import LiveTracking from './pages/LiveTracking'
 import Layout from './components/Layout'
 
 function App() {
@@ -117,6 +118,18 @@ function App() {
             isAuthenticated ? (
               <Layout onLogout={handleLogout}>
                 <Users />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/live-tracking"
+          element={
+            isAuthenticated ? (
+              <Layout onLogout={handleLogout}>
+                <LiveTracking />
               </Layout>
             ) : (
               <Navigate to="/login" />

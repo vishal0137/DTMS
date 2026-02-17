@@ -372,3 +372,219 @@
   border-radius: 8px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
+/* Live Tracking Animations */
+@keyframes busMove {
+  0% {
+    transform: translateX(-50%) translateY(-50%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) translateX(10px);
+  }
+}
+
+@keyframes busArrive {
+  0% {
+    transform: translateX(-50%) translateY(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-50%) scale(1.2);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) scale(1);
+  }
+}
+
+@keyframes routePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes signalBars {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes statusBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes progressFill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+  }
+}
+
+/* Utility classes */
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.6s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.animate-busMove {
+  animation: busMove 2s ease-in-out infinite alternate;
+}
+
+.animate-busArrive {
+  animation: busArrive 0.8s ease-in-out;
+}
+
+.animate-routePulse {
+  animation: routePulse 2s infinite;
+}
+
+.animate-signalBars {
+  animation: signalBars 1.5s ease-in-out infinite;
+}
+
+.animate-statusBlink {
+  animation: statusBlink 2s ease-in-out infinite;
+}
+
+.animate-progressFill {
+  animation: progressFill 3s ease-in-out infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Stagger animation for lists */
+.stagger-item {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+.stagger-item:nth-child(3) { animation-delay: 0.3s; }
+.stagger-item:nth-child(4) { animation-delay: 0.4s; }
+.stagger-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* Hover effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Button ripple effect */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Route line gradient animation */
+.route-line {
+  background: linear-gradient(90deg, #10b981, #3b82f6, #ef4444);
+  background-size: 200% 100%;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
