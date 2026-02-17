@@ -4,27 +4,33 @@
 
 The Smart DTC Platform uses PostgreSQL as the primary database with SQLAlchemy ORM for data management.
 
+## Database Statistics
+
+| Metric | Count |
+|--------|-------|
+| Total Tables | 10 |
+| Original DTMS Tables | 5 |
+| Enhanced Tables | 5 |
+| Foreign Key Relationships | 12 |
+| Indexed Fields | 25+ |
+
 ## Schema Comparison
 
 ### Original DTMS Schema vs Current Implementation
 
-The project integrates the original DTMS database schema with enhanced features:
-
-#### Original DTMS Tables (from DTMS_database.sql)
-1. **routes** - Bus route details
-2. **stops** - Bus stop locations with GPS
-3. **route_stops** - Route-stop mapping
-4. **buses** - Bus fleet information
-5. **live_bus_locations** - Real-time GPS tracking
-
-#### Enhanced Smart DTC Schema
-All original tables PLUS:
-6. **users** - User accounts with authentication
-7. **wallets** - User wallet balances
-8. **metro_cards** - Metro card management
-9. **transactions** - Financial transactions
-10. **bookings** - Ticket bookings
-11. **payments** - Payment processing
+| Table Name | Source | Purpose |
+|------------|--------|---------|
+| routes | DTMS | Bus route details |
+| stops | DTMS | Bus stop locations with GPS |
+| route_stops | DTMS | Route-stop mapping |
+| buses | DTMS | Bus fleet information |
+| live_bus_locations | DTMS | Real-time GPS tracking |
+| users | Enhanced | User accounts with authentication |
+| wallets | Enhanced | User wallet balances |
+| metro_cards | Enhanced | Metro card management |
+| transactions | Enhanced | Financial transactions |
+| bookings | Enhanced | Ticket bookings |
+| payments | Enhanced | Payment processing |
 
 ## Complete Schema
 
@@ -224,15 +230,17 @@ wallets (1) ──────── (N) transactions
 
 ## Key Relationships
 
-1. **User → Wallet**: One-to-One
-2. **User → Metro Cards**: One-to-Many
-3. **User → Bookings**: One-to-Many
-4. **Wallet → Transactions**: One-to-Many
-5. **Bus → Routes**: One-to-Many
-6. **Bus → Live Location**: One-to-One
-7. **Route → Stops**: One-to-Many
-8. **Route → Bookings**: One-to-Many
-9. **Booking → Payment**: One-to-One
+| Relationship Type | From Table | To Table | Cardinality |
+|------------------|------------|----------|-------------|
+| User-Wallet | users | wallets | 1:1 |
+| User-MetroCards | users | metro_cards | 1:N |
+| User-Bookings | users | bookings | 1:N |
+| Wallet-Transactions | wallets | transactions | 1:N |
+| Bus-Routes | buses | routes | 1:N |
+| Bus-LiveLocation | buses | live_bus_locations | 1:1 |
+| Route-Stops | routes | stops | 1:N |
+| Route-Bookings | routes | bookings | 1:N |
+| Booking-Payment | bookings | payments | 1:1 |
 
 ## Migration from DTMS Schema
 
@@ -318,18 +326,24 @@ WHERE b.is_active = TRUE;
 ## Performance Optimization
 
 ### Recommended Indexes
-All critical indexes are already created in the schema above. Additional indexes for specific queries:
+
+All critical indexes are created in the schema. Additional indexes for specific use cases:
+
+| Index Name | Table | Columns | Purpose |
+|------------|-------|---------|---------|
+| idx_bookings_journey_date | bookings | journey_date | Analytics queries |
+| idx_payments_payment_date | payments | payment_date | Financial reports |
+| idx_routes_route_name | routes | route_name | Search functionality |
+| idx_stops_stop_name | stops | stop_name | Search functionality |
+| idx_bookings_user_status | bookings | user_id, status | Composite queries |
+| idx_routes_active_bus | routes | is_active, bus_id | Fleet management |
 
 ```sql
--- For analytics queries
+-- Create additional indexes
 CREATE INDEX idx_bookings_journey_date ON bookings(journey_date);
 CREATE INDEX idx_payments_payment_date ON payments(payment_date);
-
--- For search functionality
 CREATE INDEX idx_routes_route_name ON routes(route_name);
 CREATE INDEX idx_stops_stop_name ON stops(stop_name);
-
--- For composite queries
 CREATE INDEX idx_bookings_user_status ON bookings(user_id, status);
 CREATE INDEX idx_routes_active_bus ON routes(is_active, bus_id);
 ```
@@ -338,13 +352,15 @@ CREATE INDEX idx_routes_active_bus ON routes(is_active, bus_id);
 
 ### Regular Maintenance Tasks
 
-```sql
--- Vacuum and analyze tables
-VACUUM ANALYZE bookings;
-VACUUM ANALYZE payments;
-VACUUM ANALYZE live_bus_locations;
+| Task | Command | Frequency |
+|------|---------|-----------|
+| Vacuum tables | `VACUUM ANALYZE table_name;` | Weekly |
+| Check table sizes | See query below | Monthly |
+| Check index usage | See query below | Monthly |
+| Backup database | `pg_dump` command | Daily |
 
--- Check table sizes
+Check table sizes:
+```sql
 SELECT 
     schemaname,
     tablename,
@@ -352,8 +368,10 @@ SELECT
 FROM pg_tables
 WHERE schemaname = 'public'
 ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
+```
 
--- Check index usage
+Check index usage:
+```sql
 SELECT 
     schemaname,
     tablename,

@@ -1,93 +1,143 @@
 # Quick Start Guide
 
-## Prerequisites Check
-- [ ] Python 3.8+ installed
-- [ ] Node.js 16+ installed
-- [ ] PostgreSQL 12+ installed and running
+## Prerequisites
 
-## 5-Minute Setup
+| Requirement | Minimum Version | Status |
+|------------|----------------|--------|
+| Python | 3.8+ | Required |
+| Node.js | 16+ | Required |
+| PostgreSQL | 12+ | Required |
 
-### 1. Database Setup (2 minutes)
+## Setup Timeline
+
+```
+Total Time: 5 minutes
+├── Database Setup: 2 minutes
+├── Backend Setup: 2 minutes
+└── Frontend Setup: 1 minute
+```
+
+## Step 1: Database Setup (2 minutes)
+
+Open PostgreSQL and execute:
+
 ```sql
--- Open PostgreSQL and run:
 CREATE DATABASE smart_dtc_db;
 ```
 
-### 2. Backend Setup (2 minutes)
-```bash
-# Navigate to backend
-cd backend
+## Step 2: Backend Setup (2 minutes)
 
-# Windows
+Navigate to backend directory:
+
+```bash
+cd web/backend
+```
+
+Create and activate virtual environment:
+
+**Windows:**
+```cmd
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
+```
 
-# Linux/Mac
+**Linux/Mac:**
+```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
 
-# Configure database
-copy ..\.env.example .env  # Windows
-cp ../.env.example .env    # Linux/Mac
+Configure environment:
 
-# Edit .env and set your DATABASE_URL
-# Example: DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/smart_dtc_db
+```bash
+# Windows
+copy ..\.env.example .env
 
-# Seed database
+# Linux/Mac
+cp ../.env.example .env
+```
+
+Edit `.env` file and set DATABASE_URL:
+```
+DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/smart_dtc_db
+```
+
+Initialize database with sample data:
+
+```bash
 python seed_data.py
+```
 
-# Start server
+Start backend server:
+
+```bash
 uvicorn main:app --reload
 ```
 
-Backend running at: http://localhost:8000
+Backend URL: http://localhost:8000
 
-### 3. Frontend Setup (1 minute)
+## Step 3: Frontend Setup (1 minute)
+
+Open new terminal and navigate to frontend:
+
 ```bash
-# Open new terminal
-cd frontend
-
-# Install and run
+cd web/frontend
 npm install
+```
+
+Create environment file:
+
+```bash
+# Windows
+echo VITE_API_URL=http://localhost:8000 > .env
+
+# Linux/Mac
 echo "VITE_API_URL=http://localhost:8000" > .env
+```
+
+Start frontend server:
+
+```bash
 npm run dev
 ```
 
-Frontend running at: http://localhost:5173
+Frontend URL: http://localhost:5173
 
-### 4. Login
-- URL: http://localhost:5173
-- Email: `admin@smartdtc.com`
-- Password: `admin123`
+## Step 4: Login
 
-## What You Get
+| Parameter | Value |
+|-----------|-------|
+| URL | http://localhost:5173 |
+| Email | admin@smartdtc.com |
+| Password | admin123 |
 
-✅ Full-featured admin dashboard
-✅ Real-time KPI metrics
-✅ Interactive charts and analytics
-✅ Live bus tracking map
-✅ Complete REST API with JWT auth
-✅ WebSocket support
-✅ Sample data (10 buses, 5 routes, 20 bookings)
+## Included Features
+
+| Feature | Description |
+|---------|-------------|
+| Admin Dashboard | Full-featured management interface |
+| KPI Metrics | Real-time performance indicators |
+| Analytics | Interactive charts and visualizations |
+| Live Tracking | Real-time bus location monitoring |
+| REST API | Complete API with JWT authentication |
+| WebSocket | Real-time data streaming |
+| Sample Data | 10 buses, 80 routes, 800 stops |
 
 ## Troubleshooting
 
-**Database connection failed?**
-- Check PostgreSQL is running
-- Verify DATABASE_URL in backend/.env
-
-**Port already in use?**
-- Backend: Use `uvicorn main:app --reload --port 8001`
-- Frontend: Change port in vite.config.js
-
-**Module not found?**
-- Ensure virtual environment is activated
-- Run `pip install -r requirements.txt` again
+| Issue | Solution |
+|-------|----------|
+| Database connection failed | Verify PostgreSQL is running and DATABASE_URL is correct |
+| Port already in use (Backend) | Use `uvicorn main:app --reload --port 8001` |
+| Port already in use (Frontend) | Change port in vite.config.js |
+| Module not found | Activate virtual environment and run `pip install -r requirements.txt` |
 
 ## Next Steps
 
-- Explore API docs: http://localhost:8000/docs
-- Check SETUP_GUIDE.md for detailed documentation
-- Review API endpoints and test with sample data
+| Resource | URL |
+|----------|-----|
+| API Documentation | http://localhost:8000/docs |
+| Detailed Setup Guide | docs/setup/SETUP_GUIDE.md |
+| API Endpoints | docs/api/API_DOCUMENTATION.md |

@@ -2,16 +2,18 @@
 
 ## Prerequisites
 
-- Python 3.8 or higher
-- Node.js 16 or higher
-- PostgreSQL 12 or higher
-- Git (optional)
+| Software | Minimum Version | Purpose |
+|----------|----------------|---------|
+| Python | 3.8+ | Backend runtime |
+| Node.js | 16+ | Frontend runtime |
+| PostgreSQL | 12+ | Database server |
+| Git | Latest | Version control (optional) |
 
 ## Backend Setup (FastAPI)
 
 ### Step 1: Navigate to Backend Directory
 ```bash
-cd backend
+cd web/backend
 ```
 
 ### Step 2: Create Virtual Environment
@@ -84,12 +86,16 @@ alembic upgrade head
 python seed_data.py
 ```
 
-This will create:
-- Admin user (admin@smartdtc.com / admin123)
-- 5 sample users
-- 10 buses with live locations
-- 5 routes with stops
-- 20 sample bookings with payments
+Sample data created:
+
+| Data Type | Count | Details |
+|-----------|-------|---------|
+| Admin User | 1 | admin@smartdtc.com / admin123 |
+| Sample Users | 5 | user1@example.com to user5@example.com |
+| Buses | 10 | With live GPS locations |
+| Routes | 80 | Complete route network |
+| Stops | 800 | GPS coordinates included |
+| Bookings | Sample set | With payment records |
 
 ### Step 8: Start Backend Server
 
@@ -97,16 +103,19 @@ This will create:
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Backend will be available at:
-- API: http://localhost:8000
-- Interactive Docs: http://localhost:8000/docs
-- Alternative Docs: http://localhost:8000/redoc
+Backend endpoints:
+
+| Endpoint | URL | Purpose |
+|----------|-----|---------|
+| API Base | http://localhost:8000 | Main API |
+| Swagger UI | http://localhost:8000/docs | Interactive documentation |
+| ReDoc | http://localhost:8000/redoc | Alternative documentation |
 
 ## Frontend Setup (React)
 
 ### Step 1: Navigate to Frontend Directory
 ```bash
-cd frontend
+cd web/frontend
 ```
 
 ### Step 2: Install Dependencies
@@ -134,88 +143,67 @@ Frontend will be available at: http://localhost:5173
 
 ## Login Credentials
 
-### Admin Account
-- Email: `admin@smartdtc.com`
-- Password: `admin123`
-
-### Sample User Accounts
-- Email: `user1@example.com` to `user5@example.com`
-- Password: `password123`
+| Account Type | Email | Password |
+|--------------|-------|----------|
+| Admin | admin@smartdtc.com | admin123 |
+| Sample Users | user1@example.com to user5@example.com | password123 |
 
 ## Testing the Application
 
-1. Open browser and navigate to http://localhost:5173
-2. Login with admin credentials
-3. Explore the dashboard with:
-   - KPI cards showing real-time metrics
-   - Route revenue charts
-   - Passenger category distribution
-   - Weekly delay analysis
-   - Live bus tracking map
+Access the application at http://localhost:5173 and login with admin credentials.
+
+Dashboard features:
+
+| Feature | Description |
+|---------|-------------|
+| KPI Cards | Real-time metrics (buses, revenue, passengers, performance) |
+| Revenue Charts | Route-wise revenue analysis |
+| Distribution Charts | Passenger category breakdown |
+| Delay Analysis | Weekly performance trends |
+| Live Map | Real-time bus location tracking |
 
 ## API Endpoints
 
-### Authentication
-- POST `/api/auth/register` - Register new user
-- POST `/api/auth/login` - Login user
-
-### Users
-- GET `/api/users/me` - Get current user
-- GET `/api/users/` - Get all users
-- GET `/api/users/{id}` - Get user by ID
-
-### Buses
-- POST `/api/buses/` - Create bus
-- GET `/api/buses/` - Get all buses
-- GET `/api/buses/{id}` - Get bus by ID
-- PUT `/api/buses/{id}` - Update bus
-- DELETE `/api/buses/{id}` - Delete bus
-
-### Routes
-- POST `/api/routes/` - Create route
-- GET `/api/routes/` - Get all routes
-- GET `/api/routes/{id}` - Get route by ID
-- PUT `/api/routes/{id}` - Update route
-- DELETE `/api/routes/{id}` - Delete route
-
-### Bookings
-- POST `/api/bookings/` - Create booking
-- GET `/api/bookings/` - Get all bookings
-- GET `/api/bookings/my-bookings` - Get user bookings
-- GET `/api/bookings/{id}` - Get booking by ID
-- PUT `/api/bookings/{id}` - Update booking
-
-### Payments
-- POST `/api/payments/` - Create payment
-- GET `/api/payments/` - Get all payments
-- GET `/api/payments/{id}` - Get payment by ID
-
-### Analytics
-- GET `/api/analytics/kpis` - Get KPI metrics
-- GET `/api/analytics/route-revenue` - Get route revenue data
-- GET `/api/analytics/passenger-categories` - Get passenger distribution
-
-### WebSocket
-- WS `/ws/live-tracking` - Real-time bus tracking
+| Category | Method | Endpoint | Description |
+|----------|--------|----------|-------------|
+| **Authentication** | POST | /api/auth/register | Register new user |
+| | POST | /api/auth/login | Login user |
+| **Users** | GET | /api/users/me | Get current user |
+| | GET | /api/users/ | Get all users |
+| | GET | /api/users/{id} | Get user by ID |
+| **Buses** | POST | /api/buses/ | Create bus |
+| | GET | /api/buses/ | Get all buses |
+| | GET | /api/buses/{id} | Get bus by ID |
+| | PUT | /api/buses/{id} | Update bus |
+| | DELETE | /api/buses/{id} | Delete bus |
+| **Routes** | POST | /api/routes/ | Create route |
+| | GET | /api/routes/ | Get all routes |
+| | GET | /api/routes/{id} | Get route by ID |
+| | PUT | /api/routes/{id}| Update route |
+| | DELETE | /api/routes/{id} | Delete route |
+| **Bookings** | POST | /api/bookings/ | Create booking |
+| | GET | /api/bookings/ | Get all bookings |
+| | GET | /api/bookings/my-bookings | Get user bookings |
+| | GET | /api/bookings/{id} | Get booking by ID |
+| | PUT | /api/bookings/{id} | Update booking |
+| **Payments** | POST | /api/payments/ | Create payment |
+| | GET | /api/payments/ | Get all payments |
+| | GET | /api/payments/{id} | Get payment by ID |
+| **Analytics** | GET | /api/analytics/kpis | Get KPI metrics |
+| | GET | /api/analytics/route-revenue | Get route revenue |
+| | GET | /api/analytics/passenger-categories | Get passenger distribution |
+| **WebSocket** | WS | /ws/live-tracking | Real-time bus tracking |
 
 ## Troubleshooting
 
-### Database Connection Issues
-- Verify PostgreSQL is running
-- Check DATABASE_URL in .env file
-- Ensure database exists and user has permissions
-
-### Port Already in Use
-- Backend: Change port in uvicorn command `--port 8001`
-- Frontend: Change port in vite.config.js
-
-### CORS Issues
-- Verify ALLOWED_ORIGINS in .env includes frontend URL
-- Check browser console for specific CORS errors
-
-### Module Not Found Errors
-- Ensure virtual environment is activated
-- Reinstall dependencies: `pip install -r requirements.txt`
+| Issue | Possible Causes | Solution |
+|-------|----------------|----------|
+| Database Connection Failed | PostgreSQL not running, incorrect credentials | Verify PostgreSQL service, check DATABASE_URL in .env |
+| Port Already in Use (Backend) | Another process using port 8000 | Use `uvicorn main:app --reload --port 8001` |
+| Port Already in Use (Frontend) | Another process using port 5173 | Change port in vite.config.js |
+| CORS Errors | Frontend URL not in ALLOWED_ORIGINS | Add frontend URL to ALLOWED_ORIGINS in .env |
+| Module Not Found | Virtual environment not activated | Activate venv and run `pip install -r requirements.txt` |
+| Import Errors | Missing dependencies | Reinstall: `pip install -r requirements.txt` |
 
 ## Production Deployment
 

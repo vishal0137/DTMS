@@ -334,25 +334,37 @@
 ## Scalability Considerations
 
 ### Horizontal Scaling
-- Multiple backend instances behind load balancer
-- Stateless JWT authentication (no session storage)
-- Database read replicas for analytics
-- CDN for static assets
+
+| Component | Strategy | Benefit |
+|-----------|----------|---------|
+| Backend Instances | Load balancer | Distributed load |
+| Authentication | Stateless JWT | No session storage |
+| Database | Read replicas | Query distribution |
+| Static Assets | CDN | Fast delivery |
 
 ### Vertical Scaling
-- Increase server resources (CPU, RAM)
-- Optimize database queries
-- Connection pooling
-- Caching layer (Redis)
+
+| Resource | Optimization | Impact |
+|----------|-------------|--------|
+| Server Resources | CPU, RAM increase | Higher capacity |
+| Database Queries | Optimization | Faster response |
+| Connection Pooling | SQLAlchemy | Resource efficiency |
+| Caching Layer | Redis | Reduced load |
 
 ### Database Optimization
-- Proper indexing on foreign keys
-- Query optimization
-- Connection pooling
-- Read replicas for heavy queries
+
+| Technique | Implementation | Benefit |
+|-----------|---------------|---------|
+| Indexing | Foreign keys, search fields | Fast queries |
+| Query Optimization | Efficient SQL | Performance |
+| Connection Pooling | SQLAlchemy | Resource management |
+| Read Replicas | PostgreSQL replication | Load distribution |
 
 ### Caching Strategy
-- API response caching
-- Static asset caching (CDN)
-- Database query caching
-- Session caching (Redis)
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| API Response | Redis | Fast retrieval |
+| Static Assets | CDN | Global delivery |
+| Database Query | Redis | Reduced DB load |
+| Session | Redis | Fast access |

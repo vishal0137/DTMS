@@ -2,12 +2,16 @@
 
 React Native mobile application for Delhi Transport Management System.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
-- Node.js 16+
-- Expo CLI
-- iOS Simulator (Mac) or Android Emulator
+
+| Requirement | Version | Purpose |
+|------------|---------|---------|
+| Node.js | 16+ | Runtime |
+| Expo CLI | Latest | Development tool |
+| iOS Simulator | Latest | iOS testing (Mac only) |
+| Android Emulator | Latest | Android testing |
 
 ### Installation
 
@@ -18,59 +22,64 @@ npm install
 
 ### Configuration
 
-1. Copy environment file:
+API URL configuration by platform:
+
+| Platform | API URL | Example |
+|----------|---------|---------|
+| Android Emulator | http://10.0.2.2:8000 | Emulator localhost |
+| iOS Simulator | http://localhost:8000 | Simulator localhost |
+| Physical Device | http://YOUR_COMPUTER_IP:8000 | Network IP |
+
+Update `.env` file:
 ```bash
 cp .env.example .env
+# Edit .env with appropriate API_URL
 ```
-
-2. Update API URL in `.env`:
-- **Android Emulator**: `http://10.0.2.2:8000`
-- **iOS Simulator**: `http://localhost:8000`
-- **Physical Device**: `http://YOUR_COMPUTER_IP:8000`
 
 ### Running the App
 
-```bash
-# Start Expo development server
-npm start
+| Command | Platform | Description |
+|---------|----------|-------------|
+| `npm start` | All | Start Expo dev server |
+| `npm run android` | Android | Run on Android |
+| `npm run ios` | iOS | Run on iOS (Mac only) |
+| `npm run web` | Web | Run in browser |
 
-# Run on Android
-npm run android
-
-# Run on iOS
-npm run ios
-
-# Run on Web
-npm run web
-```
-
-## 📱 Features
+## Features
 
 ### Passenger Features
-- ✅ User authentication (Login/Logout)
-- ✅ Live bus tracking on map
-- ✅ Browse 80+ routes
-- ✅ View route details with stops
-- ✅ View booking history
-- ✅ Digital wallet balance
-- ✅ User profile management
+
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Authentication | Complete | Login/Logout functionality |
+| Live Tracking | Complete | Real-time bus locations |
+| Route Browsing | Complete | 80+ routes available |
+| Route Details | Complete | Stops and schedules |
+| Booking History | Complete | Past bookings |
+| Digital Wallet | Complete | Balance management |
+| Profile Management | Complete | User settings |
 
 ### Screens
-1. **Home** - Dashboard with live bus tracking and stats
-2. **Routes** - Browse and search all routes
-3. **Route Detail** - View route map and stops
-4. **Bookings** - View booking history
-5. **Profile** - User profile and settings
 
-## 🛠️ Tech Stack
+| Screen | Purpose |
+|--------|---------|
+| Home | Dashboard with live tracking and stats |
+| Routes | Browse and search all routes |
+| Route Detail | View route map and stops |
+| Bookings | View booking history |
+| Profile | User profile and settings |
 
-- **Framework**: React Native (Expo)
-- **Navigation**: React Navigation
-- **UI Library**: React Native Paper
-- **Maps**: React Native Maps
-- **State Management**: Context API
-- **HTTP Client**: Axios
-- **Storage**: AsyncStorage
+## Tech Stack
+
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| Framework | React Native (Expo) | Cross-platform development |
+| Navigation | React Navigation | Screen routing |
+| UI Library | React Native Paper | UI components |
+| Maps | React Native Maps | Location visualization |
+| State Management | Context API | Global state |
+| HTTP Client | Axios | API communication |
+| Storage | AsyncStorage | Local data persistence |
 
 ## 📦 Project Structure
 
@@ -97,15 +106,19 @@ mobile/
 └── README.md
 ```
 
-## 🔐 Authentication
+## Authentication
 
 Default credentials:
-- **Email**: `admin@smartdtc.com`
-- **Password**: `admin123`
 
-## 🗺️ Maps Setup
+| Field | Value |
+|-------|-------|
+| Email | admin@smartdtc.com |
+| Password | admin123 |
+
+## Maps Setup
 
 ### Android
+
 Add Google Maps API key to `app.json`:
 ```json
 {
@@ -120,86 +133,80 @@ Add Google Maps API key to `app.json`:
 ```
 
 ### iOS
+
 No additional setup required for development.
 
-## 📱 Testing on Physical Device
+## Testing on Physical Device
 
-1. Install Expo Go app on your device
-2. Ensure device and computer are on same network
-3. Update API URL in `.env` to your computer's IP
-4. Scan QR code from Expo Dev Tools
+| Step | Action |
+|------|--------|
+| 1 | Install Expo Go app on device |
+| 2 | Ensure device and computer on same network |
+| 3 | Update API URL in `.env` to computer's IP |
+| 4 | Scan QR code from Expo Dev Tools |
 
-## 🚀 Building for Production
+## Building for Production
 
-### Android APK
-```bash
-expo build:android
-```
+| Platform | Command | Output |
+|----------|---------|--------|
+| Android | `expo build:android` | APK file |
+| iOS | `expo build:ios` | IPA file |
 
-### iOS IPA
-```bash
-expo build:ios
-```
+## Troubleshooting
 
-## 🔧 Troubleshooting
+| Issue | Solution |
+|-------|----------|
+| Cannot connect to API | Check API URL in `.env`, ensure backend is running |
+| Android emulator connection | Use `10.0.2.2` instead of `localhost` |
+| Physical device connection | Use computer's IP address |
+| Maps not showing | Check internet connection, verify API key (Android) |
+| Location permissions | Enable location permissions in device settings |
+| Build errors | Clear cache: `expo start -c`, reinstall: `rm -rf node_modules && npm install` |
 
-### Cannot connect to API
-- Check API URL in `.env`
-- Ensure backend is running
-- For Android emulator, use `10.0.2.2` instead of `localhost`
-- For physical device, use computer's IP address
+## API Integration
 
-### Maps not showing
-- Check internet connection
-- Verify Google Maps API key (Android)
-- Enable location permissions
-
-### Build errors
-```bash
-# Clear cache
-expo start -c
-
-# Reinstall dependencies
-rm -rf node_modules
-npm install
-```
-
-## 📄 API Integration
-
-The app connects to the FastAPI backend at `http://localhost:8000`
+Backend API base URL: `http://localhost:8000`
 
 ### Endpoints Used
-- `POST /api/auth/login` - User authentication
-- `GET /api/buses` - Get all buses
-- `GET /api/routes` - Get all routes
-- `GET /api/routes/{id}` - Get route details
-- `GET /api/stops` - Get stops
-- `GET /api/bookings` - Get user bookings
 
-## 🎨 Customization
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| /api/auth/login | POST | User authentication |
+| /api/buses | GET | Get all buses |
+| /api/routes | GET | Get all routes |
+| /api/routes/{id} | GET | Get route details |
+| /api/stops | GET | Get stops |
+| /api/bookings | GET | Get user bookings |
+
+## Customization
 
 ### Theme Colors
+
 Edit colors in individual screen styles or create a theme file.
 
-### App Icon & Splash Screen
-Replace files in `assets/` folder:
-- `icon.png` - App icon (1024x1024)
-- `splash.png` - Splash screen (1242x2436)
-- `adaptive-icon.png` - Android adaptive icon (1024x1024)
+### App Assets
 
-## 📝 Notes
+| Asset | Size | Purpose |
+|-------|------|---------|
+| icon.png | 1024x1024 | App icon |
+| splash.png | 1242x2436 | Splash screen |
+| adaptive-icon.png | 1024x1024 | Android adaptive icon |
 
-- This is an Expo managed workflow app
-- Requires backend API to be running
-- Location permissions needed for maps
-- Optimized for portrait orientation
+Replace files in `assets/` folder.
 
-## 🔗 Related
+## Notes
 
-- [Backend API](../backend/README.md)
-- [Web Dashboard](../frontend/README.md)
-- [Main Documentation](../README.md)
+| Note | Details |
+|------|---------|
+| Workflow | Expo managed workflow |
+| Backend Dependency | Requires backend API running |
+| Permissions | Location permissions needed for maps |
+| Orientation | Optimized for portrait |
 
----
+## Related Documentation
 
-**Built with React Native & Expo** 📱✨
+| Document | Path |
+|----------|------|
+| Backend API | ../web/backend/README.md |
+| Web Dashboard | ../web/frontend/README.md |
+| Main Documentation | ../README.md |

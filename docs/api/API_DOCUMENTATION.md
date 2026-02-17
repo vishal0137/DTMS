@@ -9,6 +9,20 @@ All protected endpoints require JWT token in Authorization header:
 Authorization: Bearer <token>
 ```
 
+## API Endpoints Overview
+
+| Category | Endpoints | Authentication Required |
+|----------|-----------|------------------------|
+| Authentication | 2 | No (for login/register) |
+| Users | 3 | Yes |
+| Buses | 5 | Yes (admin/operator) |
+| Routes | 5 | Yes (admin/operator) |
+| Stops | 2 | Yes (admin/operator) |
+| Bookings | 5 | Yes |
+| Payments | 3 | Yes |
+| Analytics | 3 | No |
+| WebSocket | 1 | No |
+
 ### Register User
 ```http
 POST /api/auth/register
@@ -449,6 +463,14 @@ ws.onclose = () => {
 
 ## Error Responses
 
+| Status Code | Error Type | Description |
+|-------------|-----------|-------------|
+| 400 | Bad Request | Invalid input data |
+| 401 | Unauthorized | Missing or invalid credentials |
+| 404 | Not Found | Resource not found |
+| 422 | Validation Error | Request validation failed |
+| 500 | Internal Server Error | Server-side error |
+
 ### 400 Bad Request
 ```json
 {
@@ -483,15 +505,14 @@ ws.onclose = () => {
 }
 ```
 
-## Rate Limiting
-
-Currently no rate limiting is implemented. For production, consider adding rate limiting middleware.
-
 ## Pagination
 
-Most list endpoints support pagination via query parameters:
-- `skip`: Number of records to skip (default: 0)
-- `limit`: Maximum number of records to return (default: 100)
+List endpoints support pagination via query parameters:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| skip | integer | 0 | Number of records to skip |
+| limit | integer | 100 | Maximum records to return |
 
 Example:
 ```http
@@ -500,6 +521,7 @@ GET /api/buses/?skip=20&limit=10
 
 ## Interactive Documentation
 
-FastAPI provides interactive API documentation:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+| Documentation | URL | Features |
+|---------------|-----|----------|
+| Swagger UI | http://localhost:8000/docs | Interactive API testing |
+| ReDoc | http://localhost:8000/redoc | Clean API reference |

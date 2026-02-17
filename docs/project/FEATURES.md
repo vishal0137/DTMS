@@ -1,314 +1,431 @@
 # Smart DTC Platform - Features Overview
 
-## 🎯 Core Features
+## Core Features Summary
 
-### Admin Dashboard
-- **Real-time KPI Metrics**
-  - Active Buses Count
-  - Total Ticket Revenue
-  - Passenger Count
-  - On-Time Performance Percentage
+| Category | Features Count | Status |
+|----------|---------------|--------|
+| Admin Dashboard | 8 | Complete |
+| Backend API | 40+ endpoints | Complete |
+| Authentication | 5 | Complete |
+| Fleet Management | 6 | Complete |
+| Route Management | 7 | Complete |
+| Booking System | 8 | Complete |
+| Payment Processing | 5 | Complete |
+| Analytics | 6 | Complete |
+| Real-time Features | 4 | Complete |
 
-- **Interactive Data Visualization**
-  - Route Revenue Bar Chart
-  - Passenger Category Distribution (Pie Chart)
-  - Weekly Delay Analysis (Line Chart)
-  - Responsive charts using Recharts library
+## Admin Dashboard
 
-- **Live Bus Tracking**
-  - Real-time GPS location display
-  - Interactive Leaflet map
-  - Bus speed and heading information
-  - Multiple bus tracking simultaneously
+### Real-time KPI Metrics
 
-- **Responsive Design**
-  - Mobile-friendly interface
-  - Collapsible sidebar navigation
-  - Tailwind CSS styling
-  - Modern UI/UX
+| Metric | Description | Update Frequency |
+|--------|-------------|------------------|
+| Active Buses | Current operational buses | Real-time |
+| Total Revenue | Cumulative ticket revenue | Real-time |
+| Passenger Count | Total passengers served | Real-time |
+| On-Time Performance | Punctuality percentage | Real-time |
 
-### Backend API Features
+### Data Visualization
 
-#### Authentication & Authorization
-- JWT-based authentication
-- Role-based access control (Admin, Operator, Passenger)
-- Secure password hashing with bcrypt
-- Token expiration and refresh
-- Protected endpoints
+| Chart Type | Purpose | Library |
+|------------|---------|---------|
+| Bar Chart | Route revenue comparison | Recharts |
+| Pie Chart | Passenger category distribution | Recharts |
+| Line Chart | Weekly delay analysis | Recharts |
+| Map | Live bus tracking | Leaflet |
 
-#### User Management
-- User registration and login
-- Profile management
-- Wallet integration
-- Metro card support
-- Transaction history
+### Design Features
 
-#### Fleet Management
-- Bus CRUD operations
-- Bus type categorization (Standard, AC, Electric, Double Decker)
-- Capacity management
-- Active/inactive status tracking
-- Registration number tracking
+| Feature | Technology | Benefit |
+|---------|-----------|---------|
+| Responsive Design | Tailwind CSS | Mobile-friendly |
+| Collapsible Sidebar | React State | Space optimization |
+| Modern UI/UX | Tailwind Components | Professional appearance |
+| Interactive Charts | Recharts | Data insights |
 
-#### Route Management
-- Route creation and management
-- Start/end location tracking
-- Distance and duration estimation
-- Fare configuration
-- Bus assignment to routes
-- Multiple stops per route
+## Backend API Features
 
-#### Stop Management
-- Stop creation along routes
-- GPS coordinates (latitude/longitude)
-- Stop ordering
-- Estimated arrival times
-- Route-stop relationships
+### Authentication & Authorization
 
-#### Booking System
-- Ticket booking creation
-- Unique booking reference generation
-- Passenger category support (General, Student, Senior, Disabled)
-- Seat allocation
-- Journey date scheduling
-- Booking status tracking (Pending, Confirmed, Cancelled, Completed)
+| Feature | Implementation | Security Level |
+|---------|---------------|----------------|
+| JWT Authentication | Token-based | High |
+| Password Hashing | bcrypt | High |
+| Role-Based Access | Admin/Operator/Passenger | Medium |
+| Token Expiration | 30 minutes | High |
+| Protected Endpoints | Middleware | High |
 
-#### Payment Processing
-- Multiple payment methods (Card, UPI, Wallet, Cash)
-- Transaction ID generation
-- Payment status tracking
-- Automatic booking confirmation on payment
-- Payment history
+### User Management
 
-#### Analytics & Reporting
-- Real-time KPI calculations
-- Route-wise revenue analysis
-- Passenger category distribution
-- Performance metrics
-- Historical data analysis
+| Feature | Description |
+|---------|-------------|
+| Registration | New user account creation |
+| Login | JWT token generation |
+| Profile Management | User data updates |
+| Wallet Integration | Digital payment system |
+| Metro Card Support | Card management |
+| Transaction History | Financial records |
 
-#### Real-time Features
-- WebSocket support for live updates
-- Bus location broadcasting
-- Real-time tracking updates
-- Live dashboard refresh
+### Fleet Management
+
+| Feature | Capability |
+|---------|-----------|
+| Bus CRUD | Create, Read, Update, Delete |
+| Type Categorization | Standard, AC, Electric, Double Decker |
+| Capacity Management | Seat allocation tracking |
+| Status Tracking | Active/Inactive monitoring |
+| Registration Numbers | Vehicle identification |
+| GPS Integration | Real-time location |
+
+### Route Management
+
+| Feature | Details |
+|---------|---------|
+| Route Creation | Define new routes |
+| Location Tracking | Start/end points |
+| Distance Estimation | Kilometer calculation |
+| Duration Estimation | Time calculation |
+| Fare Configuration | Pricing setup |
+| Bus Assignment | Vehicle allocation |
+| Stop Management | Multiple stops per route |
+
+### Booking System
+
+| Feature | Functionality |
+|---------|--------------|
+| Ticket Booking | Reservation creation |
+| Reference Generation | Unique booking IDs |
+| Category Support | General, Student, Senior, Disabled |
+| Seat Allocation | Seat assignment |
+| Journey Scheduling | Date/time management |
+| Status Tracking | Pending, Confirmed, Cancelled, Completed |
+| History | Past bookings |
+| Cancellation | Booking cancellation |
+
+### Payment Processing
+
+| Feature | Support |
+|---------|---------|
+| Payment Methods | Card, UPI, Wallet, Cash |
+| Transaction IDs | Unique identifiers |
+| Status Tracking | Success, Failed, Pending, Refunded |
+| Auto-Confirmation | Booking confirmation on payment |
+| Payment History | Transaction records |
+
+### Analytics & Reporting
+
+| Metric | Description |
+|--------|-------------|
+| Real-time KPIs | Live performance indicators |
+| Route Revenue | Revenue by route analysis |
+| Passenger Distribution | Category-wise breakdown |
+| Performance Metrics | On-time performance tracking |
+| Historical Analysis | Trend analysis |
+
+### Real-time Features
+
+| Feature | Technology | Purpose |
+|---------|-----------|---------|
+| WebSocket Support | Socket.IO | Live updates |
+| Bus Location Broadcasting | WebSocket | Real-time tracking |
+| Dashboard Refresh | WebSocket | Live data |
+| Location Updates | GPS + WebSocket | Tracking |
 
 ### Database Features
 
-#### Comprehensive Data Models
-- Users with role-based access
-- Wallets with balance tracking
-- Metro cards
-- Transaction logs
-- Bus fleet records
-- Route definitions
-- Stop locations
-- Booking records
-- Payment transactions
-- Live GPS locations
+#### Data Models
 
-#### Database Relationships
-- One-to-One: User-Wallet, Bus-LiveLocation, Booking-Payment
-- One-to-Many: User-Bookings, Route-Stops, Route-Bookings
-- Foreign key constraints
-- Indexed fields for performance
+| Model | Purpose | Relationships |
+|-------|---------|---------------|
+| Users | Authentication & profiles | 1:1 Wallet, 1:N Bookings |
+| Wallets | Balance tracking | 1:N Transactions |
+| Metro Cards | Card management | N:1 User |
+| Transactions | Financial logs | N:1 Wallet |
+| Buses | Fleet records | 1:N Routes, 1:1 Location |
+| Routes | Route definitions | N:1 Bus, 1:N Stops |
+| Stops | Location data | N:1 Route |
+| Bookings | Reservation records | N:1 User, N:1 Route, 1:1 Payment |
+| Payments | Transaction records | 1:1 Booking |
+| LiveBusLocations | GPS tracking | 1:1 Bus |
 
-#### Migration Support
-- Alembic integration
-- Version-controlled schema changes
-- Easy rollback capability
-- Automatic migration generation
+#### Database Optimization
+
+| Feature | Implementation | Benefit |
+|---------|---------------|---------|
+| Indexing | Foreign keys, search fields | Fast queries |
+| Relationships | Foreign key constraints | Data integrity |
+| Migration Support | Alembic | Version control |
+| Connection Pooling | SQLAlchemy | Performance |
 
 ### Security Features
 
 #### Data Protection
-- Password hashing with bcrypt
-- SQL injection prevention via ORM
-- CORS protection
-- Environment variable configuration
-- Secure token storage
+
+| Security Layer | Implementation | Level |
+|---------------|---------------|-------|
+| Password Hashing | bcrypt | High |
+| SQL Injection Prevention | SQLAlchemy ORM | High |
+| CORS Protection | FastAPI middleware | Medium |
+| Environment Variables | .env files | High |
+| Token Storage | Secure storage | High |
 
 #### API Security
-- JWT token validation
-- Token expiration
-- Protected endpoints
-- Role-based authorization
-- Request validation with Pydantic
+
+| Feature | Technology | Purpose |
+|---------|-----------|---------|
+| JWT Validation | PyJWT | Authentication |
+| Token Expiration | 30 minutes | Security |
+| Protected Endpoints | Middleware | Authorization |
+| Role-Based Authorization | Custom decorator | Access control |
+| Request Validation | Pydantic | Input validation |
 
 ### Developer Features
 
 #### Code Quality
-- Modular architecture
-- Clean separation of concerns
-- Type hints with Pydantic
-- Comprehensive error handling
-- RESTful API design
+
+| Aspect | Implementation |
+|--------|---------------|
+| Architecture | Modular, layered |
+| Separation of Concerns | Models, Schemas, Routers |
+| Type Safety | Pydantic models |
+| Error Handling | Comprehensive try-catch |
+| API Design | RESTful principles |
 
 #### Documentation
-- Interactive API docs (Swagger UI)
-- Alternative docs (ReDoc)
-- Comprehensive setup guides
-- API endpoint documentation
-- Code comments
+
+| Type | Tool | URL |
+|------|------|-----|
+| Interactive API | Swagger UI | /docs |
+| Alternative API | ReDoc | /redoc |
+| Setup Guides | Markdown | /docs/setup |
+| API Reference | Markdown | /docs/api |
+| Code Comments | Inline | Source files |
 
 #### Development Tools
-- Hot reload with Uvicorn
-- Vite for fast frontend builds
-- Database seeding script
-- Setup automation scripts
-- Environment configuration
 
-## 🚀 Technical Highlights
+| Tool | Purpose | Benefit |
+|------|---------|---------|
+| Uvicorn | ASGI server | Hot reload |
+| Vite | Build tool | Fast builds |
+| Seed Script | Data generation | Quick setup |
+| Setup Scripts | Automation | Easy installation |
+| Environment Config | .env files | Flexibility |
+
+## Technical Highlights
 
 ### Performance
-- Efficient database queries with SQLAlchemy
-- Connection pooling
-- Indexed database fields
-- Optimized API responses
-- Fast frontend rendering with React
+
+| Feature | Implementation | Impact |
+|---------|---------------|--------|
+| Database Queries | SQLAlchemy optimization | Fast response |
+| Connection Pooling | SQLAlchemy | Resource efficiency |
+| Database Indexing | Strategic indexes | Query speed |
+| API Responses | Optimized serialization | Low latency |
+| Frontend Rendering | React optimization | Smooth UI |
 
 ### Scalability
-- Modular router architecture
-- Stateless JWT authentication
-- Database migration support
-- Environment-based configuration
-- Horizontal scaling ready
+
+| Feature | Benefit |
+|---------|---------|
+| Modular Router Architecture | Easy to extend |
+| Stateless JWT Authentication | Horizontal scaling |
+| Database Migration Support | Schema evolution |
+| Environment-Based Configuration | Multi-environment |
+| Horizontal Scaling Ready | Load balancing support |
 
 ### Maintainability
-- Clear project structure
-- Separated concerns (models, schemas, routers)
-- Reusable components
-- Consistent naming conventions
-- Comprehensive documentation
 
-## 📊 Data Insights
+| Aspect | Implementation |
+|--------|---------------|
+| Project Structure | Clear organization |
+| Separated Concerns | Models, Schemas, Routers |
+| Reusable Components | DRY principle |
+| Naming Conventions | Consistent standards |
+| Documentation | Comprehensive |
+
+## Data Insights
 
 ### Analytics Capabilities
-- Revenue tracking by route
-- Passenger demographics
-- Delay pattern analysis
-- Performance metrics
-- Booking trends
+
+| Capability | Data Source | Visualization |
+|------------|-------------|---------------|
+| Revenue Tracking | Payments table | Bar charts |
+| Passenger Demographics | Bookings table | Pie charts |
+| Delay Patterns | Routes table | Line charts |
+| Performance Metrics | Multiple tables | KPI cards |
+| Booking Trends | Bookings table | Time series |
 
 ### Reporting Features
-- KPI dashboard
-- Visual data representation
-- Historical comparisons
-- Real-time updates
-- Export-ready data
 
-## 🎨 User Experience
+| Feature | Type | Format |
+|---------|------|--------|
+| KPI Dashboard | Real-time | Visual cards |
+| Data Visualization | Interactive | Charts |
+| Historical Comparisons | Time-based | Graphs |
+| Real-time Updates | WebSocket | Live data |
+| Export-Ready Data | API | JSON |
+
+## User Experience
 
 ### Interface Design
-- Clean, modern UI
-- Intuitive navigation
-- Responsive layout
-- Color-coded metrics
-- Interactive charts
+
+| Aspect | Implementation | Benefit |
+|--------|---------------|---------|
+| UI Style | Clean, modern | Professional |
+| Navigation | Intuitive | Easy to use |
+| Layout | Responsive | Multi-device |
+| Metrics | Color-coded | Quick insights |
+| Charts | Interactive | Data exploration |
 
 ### Accessibility
-- Keyboard navigation support
-- Screen reader friendly
-- High contrast colors
-- Clear visual hierarchy
-- Mobile responsive
 
-## 🔧 Operational Features
+| Feature | Implementation |
+|---------|---------------|
+| Keyboard Navigation | Full support |
+| Screen Reader | Semantic HTML |
+| Color Contrast | High contrast |
+| Visual Hierarchy | Clear structure |
+| Mobile Responsive | Tailwind CSS |
+
+## Operational Features
 
 ### Fleet Operations
-- Bus status monitoring
-- Route assignment
-- Capacity tracking
-- Location tracking
-- Performance monitoring
+
+| Feature | Capability |
+|---------|-----------|
+| Bus Status Monitoring | Real-time tracking |
+| Route Assignment | Dynamic allocation |
+| Capacity Tracking | Seat management |
+| Location Tracking | GPS integration |
+| Performance Monitoring | Metrics analysis |
 
 ### Passenger Services
-- Easy booking process
-- Multiple payment options
-- Booking history
-- Wallet management
-- Metro card integration
+
+| Service | Description |
+|---------|-------------|
+| Booking Process | Simple, fast |
+| Payment Options | Multiple methods |
+| Booking History | Complete records |
+| Wallet Management | Digital payments |
+| Metro Card Integration | Card support |
 
 ### Financial Management
-- Revenue tracking
-- Payment processing
-- Transaction logs
-- Wallet system
-- Refund support
 
-## 🌐 Integration Ready
+| Feature | Capability |
+|---------|-----------|
+| Revenue Tracking | Real-time |
+| Payment Processing | Multiple methods |
+| Transaction Logs | Complete history |
+| Wallet System | Digital balance |
+| Refund Support | Cancellation handling |
+
+## Integration Ready
 
 ### API-First Design
-- RESTful endpoints
-- JSON responses
-- Standard HTTP methods
-- Comprehensive error codes
-- WebSocket support
+
+| Feature | Standard | Benefit |
+|---------|----------|---------|
+| RESTful Endpoints | REST | Industry standard |
+| JSON Responses | JSON | Universal format |
+| HTTP Methods | Standard | Predictable |
+| Error Codes | HTTP | Clear communication |
+| WebSocket Support | WS | Real-time data |
 
 ### Extensibility
-- Modular architecture
-- Plugin-ready design
-- Third-party integration support
-- Webhook capabilities
-- Event-driven updates
 
-## 📱 Platform Support
+| Aspect | Capability |
+|--------|-----------|
+| Modular Architecture | Easy to extend |
+| Plugin-Ready Design | Third-party integration |
+| Integration Support | API-based |
+| Webhook Capabilities | Event notifications |
+| Event-Driven Updates | Real-time sync |
+
+## Platform Support
 
 ### Backend
-- Cross-platform (Windows, Linux, Mac)
-- Docker-ready
-- Cloud deployment ready
-- PostgreSQL database
-- Python 3.8+
+
+| Platform | Support | Notes |
+|----------|---------|-------|
+| Windows | Yes | Full support |
+| Linux | Yes | Full support |
+| Mac | Yes | Full support |
+| Docker | Ready | Container support |
+| Cloud | Ready | Deployment ready |
 
 ### Frontend
-- Modern browsers
-- Mobile responsive
-- Progressive Web App ready
-- Cross-platform
-- Node.js 16+
 
-## 🎯 Use Cases
+| Platform | Support | Technology |
+|----------|---------|-----------|
+| Modern Browsers | Yes | Chrome, Firefox, Safari, Edge |
+| Mobile Responsive | Yes | Tailwind CSS |
+| PWA Ready | Yes | Service workers |
+| Cross-Platform | Yes | Web standards |
+
+### Requirements
+
+| Component | Version | Purpose |
+|-----------|---------|---------|
+| Python | 3.8+ | Backend runtime |
+| Node.js | 16+ | Frontend runtime |
+| PostgreSQL | 12+ | Database |
+
+## Use Cases
 
 ### For Administrators
-- Monitor fleet operations
-- Track revenue and performance
-- Manage routes and schedules
-- Analyze passenger data
-- Generate reports
+
+| Task | Feature |
+|------|---------|
+| Fleet Monitoring | Real-time dashboard |
+| Revenue Tracking | Analytics reports |
+| Route Management | CRUD operations |
+| Passenger Analysis | Demographics data |
+| Report Generation | Export capabilities |
 
 ### For Operators
-- Update bus locations
-- Manage bookings
-- Process payments
-- Handle customer queries
-- Monitor routes
+
+| Task | Feature |
+|------|---------|
+| Location Updates | GPS tracking |
+| Booking Management | Status updates |
+| Payment Processing | Multiple methods |
+| Customer Support | Query handling |
+| Route Monitoring | Real-time data |
 
 ### For Passengers
-- Book tickets online
-- Track buses in real-time
-- Manage wallet
-- View booking history
-- Multiple payment options
 
-## 🔮 Future Enhancement Ready
+| Task | Feature |
+|------|---------|
+| Online Booking | Web interface |
+| Bus Tracking | Live map |
+| Wallet Management | Digital payments |
+| Booking History | Past records |
+| Payment Options | Multiple methods |
+
+## Future Enhancement Ready
 
 ### Planned Features
-- SMS/Email notifications
-- Mobile app integration
-- Advanced analytics
-- AI-based route optimization
-- Predictive maintenance
-- Multi-language support
-- QR code tickets
-- Loyalty programs
+
+| Feature | Priority | Complexity |
+|---------|----------|------------|
+| SMS/Email Notifications | High | Medium |
+| Mobile App Integration | High | High |
+| Advanced Analytics | Medium | Medium |
+| AI Route Optimization | Medium | High |
+| Predictive Maintenance | Low | High |
+| Multi-Language Support | Medium | Low |
+| QR Code Tickets | High | Low |
+| Loyalty Programs | Low | Medium |
 
 ### Integration Possibilities
-- Payment gateways
-- SMS services
-- Email services
-- GPS tracking devices
-- Mobile applications
-- Third-party analytics
-- Government systems
-- Partner services
+
+| Integration | Purpose | Benefit |
+|-------------|---------|---------|
+| Payment Gateways | Online payments | Convenience |
+| SMS Services | Notifications | Communication |
+| Email Services | Alerts | Updates |
+| GPS Devices | Tracking | Accuracy |
+| Mobile Apps | User access | Accessibility |
+| Analytics Tools | Insights | Intelligence |
+| Government Systems | Compliance | Regulation |
+| Partner Services | Ecosystem | Expansion |

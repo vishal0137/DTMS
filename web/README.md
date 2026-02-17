@@ -2,7 +2,7 @@
 
 Full-stack web application for Delhi Transport Management System with FastAPI backend and React frontend.
 
-## 📁 Structure
+## Structure
 
 ```
 web/
@@ -10,17 +10,20 @@ web/
 └── frontend/         # React admin dashboard
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
-- Python 3.9+
-- Node.js 16+
-- PostgreSQL 14+
+
+| Requirement | Version | Purpose |
+|------------|---------|---------|
+| Python | 3.9+ | Backend runtime |
+| Node.js | 16+ | Frontend runtime |
+| PostgreSQL | 14+ | Database |
 
 ### Backend Setup
 
 ```bash
-cd backend
+cd web/backend
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
@@ -36,12 +39,12 @@ python seed_data.py
 uvicorn main:app --reload
 ```
 
-Backend runs at: http://localhost:8000
+Backend URL: http://localhost:8000
 
 ### Frontend Setup
 
 ```bash
-cd frontend
+cd web/frontend
 npm install
 
 # Configure environment
@@ -51,103 +54,132 @@ cp .env.example .env
 npm run dev
 ```
 
-Frontend runs at: http://localhost:5173
+Frontend URL: http://localhost:5173
 
-## 🔐 Default Login
+## Default Login
 
-- **Email**: `admin@smartdtc.com`
-- **Password**: `admin123`
+| Field | Value |
+|-------|-------|
+| Email | admin@smartdtc.com |
+| Password | admin123 |
 
-## 📊 Backend (FastAPI)
+## Backend (FastAPI)
 
 ### Features
-- ✅ RESTful API with 40+ endpoints
-- ✅ JWT authentication
-- ✅ PostgreSQL database with SQLAlchemy ORM
-- ✅ Alembic migrations
-- ✅ WebSocket support for real-time updates
-- ✅ CORS configuration
-- ✅ Pydantic validation
-- ✅ Comprehensive error handling
+
+| Feature | Description |
+|---------|-------------|
+| RESTful API | 40+ endpoints |
+| JWT Authentication | Secure token-based auth |
+| PostgreSQL Database | SQLAlchemy ORM |
+| Alembic Migrations | Database versioning |
+| WebSocket Support | Real-time updates |
+| CORS Configuration | Cross-origin support |
+| Pydantic Validation | Request/response validation |
+| Error Handling | Comprehensive error management |
 
 ### API Documentation
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+
+| Documentation | URL | Purpose |
+|--------------|-----|---------|
+| Swagger UI | http://localhost:8000/docs | Interactive testing |
+| ReDoc | http://localhost:8000/redoc | Clean reference |
 
 ### Key Endpoints
-- `POST /api/auth/login` - User authentication
-- `GET /api/buses` - Get all buses
-- `GET /api/buses/live-locations` - Live bus tracking
-- `GET /api/routes` - Get all routes
-- `GET /api/stops` - Get all stops
-- `GET /api/bookings` - Get bookings
-- `GET /api/users` - Get users
-- `GET /api/analytics/*` - Analytics endpoints
+
+| Category | Endpoints | Authentication |
+|----------|-----------|---------------|
+| Authentication | POST /api/auth/login, /register | No |
+| Buses | GET, POST, PUT, DELETE /api/buses | Yes |
+| Routes | GET, POST, PUT, DELETE /api/routes | Yes |
+| Stops | GET, POST /api/stops | Yes |
+| Bookings | GET, POST, PUT /api/bookings | Yes |
+| Users | GET /api/users | Yes |
+| Analytics | GET /api/analytics/* | No |
 
 ### Database Models
-- User (authentication & profiles)
-- Wallet (digital payments)
-- Bus (vehicle management)
-- Route (route information)
-- Stop (bus stops)
-- Booking (ticket bookings)
-- Payment (payment records)
-- LiveBusLocation (GPS tracking)
 
-## 🖥️ Frontend (React)
+| Model | Purpose | Relationships |
+|-------|---------|---------------|
+| User | Authentication & profiles | 1:1 Wallet, 1:N Bookings |
+| Wallet | Digital payments | N:1 User |
+| Bus | Vehicle management | 1:N Routes, 1:1 Location |
+| Route | Route information | N:1 Bus, 1:N Stops |
+| Stop | Bus stops | N:1 Route |
+| Booking | Ticket bookings | N:1 User, N:1 Route, 1:1 Payment |
+| Payment | Payment records | 1:1 Booking |
+| LiveBusLocation | GPS tracking | 1:1 Bus |
+
+## Frontend (React)
 
 ### Features
-- ✅ Modern admin dashboard
-- ✅ Real-time KPI cards
-- ✅ Interactive charts (Recharts)
-- ✅ Live bus tracking (Leaflet maps)
-- ✅ Metro-style route visualization
-- ✅ Responsive design (Tailwind CSS)
-- ✅ 7 complete pages
+
+| Feature | Technology | Status |
+|---------|-----------|--------|
+| Admin Dashboard | React 18 | Complete |
+| KPI Cards | Custom components | Complete |
+| Interactive Charts | Recharts | Complete |
+| Live Tracking | Leaflet maps | Complete |
+| Route Visualization | Custom design | Complete |
+| Responsive Design | Tailwind CSS | Complete |
+| Pages | 7 complete pages | Complete |
 
 ### Pages
-1. **Dashboard** - Overview with KPIs, charts, and live map
-2. **Bus Routes** - View routes by bus
-3. **Routes** - Browse all 80 routes
-4. **Stops** - Search 800+ bus stops
-5. **Bookings** - Manage bookings
-6. **Analytics** - Revenue and performance metrics
-7. **Users** - User management
+
+| Page | Purpose | Features |
+|------|---------|----------|
+| Dashboard | Overview | KPIs, charts, live map |
+| Bus Routes | Routes by bus | Bus fleet, route assignments |
+| Routes | All routes | 80 routes, search, timeline view |
+| Stops | Bus stops | 800+ stops, search |
+| Bookings | Booking management | Status tracking |
+| Analytics | Performance metrics | Revenue, trends |
+| Users | User management | CRUD operations |
 
 ### Tech Stack
-- React 18
-- Tailwind CSS
-- Recharts (charts)
-- Leaflet (maps)
-- Axios (HTTP client)
-- Vite (build tool)
 
-## 🗄️ Database
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| Framework | React 18 | UI library |
+| Styling | Tailwind CSS | Responsive design |
+| Charts | Recharts | Data visualization |
+| Maps | Leaflet | Location tracking |
+| HTTP Client | Axios | API communication |
+| Build Tool | Vite | Fast development |
 
-### Setup
-1. Install PostgreSQL 14+
-2. Create database: `CREATE DATABASE dtms_db;`
-3. Update `.env` with credentials
-4. Run migrations: `alembic upgrade head`
-5. Seed data: `python seed_data.py`
+## Database
+
+### Setup Steps
+
+| Step | Command | Purpose |
+|------|---------|---------|
+| 1 | Install PostgreSQL 14+ | Database server |
+| 2 | `CREATE DATABASE dtms_db;` | Create database |
+| 3 | Update `.env` | Configure connection |
+| 4 | `alembic upgrade head` | Run migrations |
+| 5 | `python seed_data.py` | Load sample data |
 
 ### Sample Data
-- 10 buses with GPS tracking
-- 80 routes with 800 stops
-- 6 users (1 admin + 5 passengers)
-- Complete booking records
 
-## 🧪 Testing
+| Data Type | Count | Details |
+|-----------|-------|---------|
+| Buses | 10 | With GPS tracking |
+| Routes | 80 | Complete network |
+| Stops | 800 | GPS coordinates |
+| Users | 6 | 1 admin + 5 passengers |
+| Bookings | Sample set | Complete records |
+
+## Testing
 
 ### Backend Tests
 ```bash
-cd backend
+cd web/backend
 pytest tests/ -v
 ```
 
 ### Frontend Tests
 ```bash
-cd frontend
+cd web/frontend
 npm test
 ```
 
@@ -157,44 +189,31 @@ cd ../tests/load
 locust -f locustfile.py
 ```
 
-## 🔧 Development
+## Development
 
 ### Backend Development
-```bash
-cd backend
 
-# Run with auto-reload
-uvicorn main:app --reload
-
-# Check database integrity
-python check_db_integrity.py
-
-# Clean database
-python clean_database.py
-
-# Import GTFS data
-python import_gtfs_data.py
-```
+| Command | Purpose |
+|---------|---------|
+| `uvicorn main:app --reload` | Run with auto-reload |
+| `python check_db_integrity.py` | Check database |
+| `python clean_database.py` | Clean database |
+| `python import_gtfs_data.py` | Import GTFS data |
 
 ### Frontend Development
-```bash
-cd frontend
 
-# Development server
-npm run dev
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview build |
 
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-## 📦 Production Build
+## Production Build
 
 ### Backend
+
 ```bash
-cd backend
+cd web/backend
 
 # Install production dependencies
 pip install -r requirements.txt
@@ -204,8 +223,9 @@ gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker
 ```
 
 ### Frontend
+
 ```bash
-cd frontend
+cd web/frontend
 
 # Build
 npm run build
@@ -213,93 +233,79 @@ npm run build
 # Output in frontend/dist/
 ```
 
-## 🌐 Deployment
+## Deployment
 
 ### Backend Deployment
-- Use gunicorn with uvicorn workers
-- Set environment variables
-- Configure PostgreSQL connection
-- Enable HTTPS
-- Set up reverse proxy (Nginx)
+
+| Step | Action |
+|------|--------|
+| 1 | Use gunicorn with uvicorn workers |
+| 2 | Set environment variables |
+| 3 | Configure PostgreSQL connection |
+| 4 | Enable HTTPS |
+| 5 | Set up reverse proxy (Nginx) |
 
 ### Frontend Deployment
-- Build static files: `npm run build`
-- Deploy to:
-  - Vercel
-  - Netlify
-  - AWS S3 + CloudFront
-  - Nginx static hosting
 
-## 🔐 Environment Variables
+Build static files and deploy to:
+
+| Platform | Type | Benefit |
+|----------|------|---------|
+| Vercel | Serverless | Easy deployment |
+| Netlify | Serverless | CI/CD integration |
+| AWS S3 + CloudFront | CDN | Scalable |
+| Nginx | Static hosting | Full control |
+
+## Environment Variables
 
 ### Backend (.env)
-```env
-DATABASE_URL=postgresql://username:password@localhost:5432/dtms_db
-SECRET_KEY=your-secret-key-min-32-chars
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-ALLOWED_ORIGINS=http://localhost:5173,http://localhost:5174
-DEBUG=True
-```
+
+| Variable | Example | Purpose |
+|----------|---------|---------|
+| DATABASE_URL | postgresql://user:pass@localhost:5432/dtms_db | Database connection |
+| SECRET_KEY | your-secret-key-min-32-chars | JWT signing |
+| ALGORITHM | HS256 | JWT algorithm |
+| ACCESS_TOKEN_EXPIRE_MINUTES | 30 | Token expiration |
+| ALLOWED_ORIGINS | http://localhost:5173 | CORS origins |
+| DEBUG | True | Debug mode |
 
 ### Frontend (.env)
-```env
-VITE_API_URL=http://localhost:8000
-```
 
-## 🚨 Troubleshooting
+| Variable | Example | Purpose |
+|----------|---------|---------|
+| VITE_API_URL | http://localhost:8000 | Backend API URL |
+
+## Troubleshooting
 
 ### Backend Issues
 
-**Database Connection Error:**
-- Check PostgreSQL is running
-- Verify credentials in `.env`
-- Ensure database exists
-- Check URL encoding for special characters in password
-
-**Import Errors:**
-- Activate virtual environment
-- Reinstall dependencies: `pip install -r requirements.txt`
-
-**Port Already in Use:**
-```bash
-# Change port
-uvicorn main:app --reload --port 8001
-```
+| Issue | Solution |
+|-------|----------|
+| Database Connection Error | Check PostgreSQL running, verify credentials, ensure database exists, check URL encoding for special characters |
+| Import Errors | Activate virtual environment, reinstall: `pip install -r requirements.txt` |
+| Port Already in Use | Change port: `uvicorn main:app --reload --port 8001` |
 
 ### Frontend Issues
 
-**Cannot Connect to API:**
-- Verify backend is running
-- Check `VITE_API_URL` in `.env`
-- Check CORS settings in backend
+| Issue | Solution |
+|-------|----------|
+| Cannot Connect to API | Verify backend running, check `VITE_API_URL` in `.env`, check CORS settings |
+| Build Errors | Clear cache: `rm -rf node_modules && npm install`, clear Vite cache: `rm -rf node_modules/.vite` |
 
-**Build Errors:**
-```bash
-# Clear cache
-rm -rf node_modules
-npm install
+## Documentation
 
-# Clear Vite cache
-rm -rf node_modules/.vite
-```
+| Document | Path | Purpose |
+|----------|------|---------|
+| Main Documentation | ../README.md | Project overview |
+| Database Documentation | ../docs/database/README.md | Database schema |
+| API Documentation | ../docs/api/API_DOCUMENTATION.md | API reference |
+| Setup Guide | ../docs/setup/SETUP_GUIDE.md | Detailed setup |
+| Mobile App | ../mobile/README.md | Mobile application |
 
-## 📚 Documentation
-
-- [Main Documentation](../README.md)
-- [Database Documentation](../docs/database/README.md)
-- [API Documentation](../docs/api/API_DOCUMENTATION.md)
-- [Setup Guide](../docs/setup/SETUP_GUIDE.md)
-- [Mobile App](../mobile/README.md)
-
-## 🤝 Contributing
+## Contributing
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for contribution guidelines.
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](../LICENSE) file.
-
----
-
-**Built with FastAPI & React** 🚀✨
